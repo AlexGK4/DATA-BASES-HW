@@ -2,9 +2,8 @@
 # TABLE STRUCTURE FOR: communities
 #
 
-DROP TABLE IF EXISTS `communities`;
 
-CREATE TABLE `communities` (
+CREATE TABLE `communities` IF not exists  (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
@@ -846,20 +845,17 @@ INSERT INTO `profiles` (`user_id`, `gender`, `birthday`, `photo_id`, `status`, `
 # TABLE STRUCTURE FOR: users
 #
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `phone` (`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE users (
+   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   first_name varchar(100)  NOT NULL,
+   last_name varchar(100)  NOT NULL,
+   email varchar(100)  NOT NULL UNIQUE,
+   phone varchar(100)  NOT NULL UNIQUE,
+   created_at datetime DEFAULT current_timestamp(),
+   updated_at datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+);
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`) VALUES (1, 'Clair', 'Strosin', 'ullrich.erick@example.com', '593-958-9678x42528', '1978-11-17 09:20:49', '2002-11-21 05:58:44');
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`) VALUES (2, 'Arvilla', 'Dickinson', 'wayne.sporer@example.net', '1-418-205-3049x980', '1992-07-11 01:09:48', '1986-05-13 03:31:55');
